@@ -16,8 +16,7 @@ const PersonProvider = ({ children }) => {
   });
   const [newPerson, setNewPerson] = useState([]);
 
-  const handSubmit = () => {
-    // setNewPerson((newPerson) => [...newPerson, person])
+  const handleSubmit = () => {
     setNewPerson([...newPerson, person]);
     setPerson({
       name: "",
@@ -58,7 +57,7 @@ const PersonProvider = ({ children }) => {
     <PersonContext.Provider
       value={{
         handleChange,
-        handSubmit,
+        handleSubmit,
         person,
         newPerson,
         imageHandler,

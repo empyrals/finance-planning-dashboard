@@ -1,7 +1,8 @@
 nav {
   display: flex;
 
-  align-items: baseline;
+  align-items: center;
+  /* justify-content: center; */
   border-bottom: 1px solid #999;
   padding: 0.6rem 0 0.6rem 0;
 }
@@ -33,6 +34,15 @@ nav {
   margin: 0 0.5rem;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+}
+.back {
+  display: flex;
+  align-items: center;
+  color: cornflowerblue;
+  padding-bottom: 0.5rem;
+}
+.back__icon {
+  font-size: 1.6rem;
 }
 .number {
   background-color: #999;

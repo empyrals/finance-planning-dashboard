@@ -1,11 +1,16 @@
 import React from "react";
 import "./Navbar.css";
+import { BiArrowBack } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <header className="section">
       <nav>
-        <a href="#">Back</a>
+        <Link to="/" className="back">
+          <BiArrowBack className="back__icon" />
+          Back
+        </Link>
         <div className="title">
           <h4>Financial Planning Heavy</h4>
         </div>
