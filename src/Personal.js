@@ -177,7 +177,7 @@ const Personal = () => {
                 style={{ display: "none" }}
                 ref={fileInputRef}
               />
-              {file && <p>{file.name} uploaded</p>}
+              {file && <p>{file.name}</p>}
             </label>
           </div>
           <div className="single-info">

@@ -18,12 +18,17 @@ nav {
 .single__section {
   display: flex;
   align-items: center;
+  margin-left: 0;
+  padding: 0 1rem;
+  border-bottom: 5px solid rgb(204, 196, 196);
+  width: 100%;
 }
 .sections {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  padding: 0.8rem 1rem 0 1rem;
+  /* padding: 0.8rem 1rem 0 1rem; */
+  padding-top: 0.8rem;
   border: 1.5px solid #999;
   margin: 0 0.5rem;
   border-top-left-radius: 5px;
@@ -40,9 +45,12 @@ nav {
 }
 .active > p:nth-of-type(2) {
   color: cornflowerblue;
-  border-bottom: 1px solid cornflowerblue;
+  /* border-bottom: 1px solid cornflowerblue; */
 }
 .active .number {
   background-color: cornflowerblue;
   color: #fefefe;
+}
+.active {
+  border-bottom: 4px solid rgb(51, 51, 231);
 }

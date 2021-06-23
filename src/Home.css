@@ -1,7 +1,7 @@
 .card {
   /* background-color: coral; */
   height: 10rem;
-  width: 18rem;
+  width: 17.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,9 +21,13 @@
 .main {
   /* padding: 1rem 1.5rem; */
   min-height: 50vh;
+  /* max-height: 70vh; */
+  /* overflow-y: scroll; */
 }
 .home__main {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .home__main p {
   display: block;

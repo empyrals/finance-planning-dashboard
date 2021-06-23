@@ -38,19 +38,38 @@ const PersonProvider = ({ children }) => {
   const [file, setFile] = useState("");
 
   // For image diplay
+  // const imageHandler = (e) => {
+  //   // const file = e.target.files[0];
+  //   console.log(e.target.files[0]);
+  //   // setFile(e.target.files[0]);
+  //   const f = e.target.files[0];
+  //   console.log(file);
+  //   if (f) {
+  //     setFile(f);
+  //     const reader = new FileReader();
+  //     console.log(file);
+  //     reader.onloadend = () => {
+  //       person.photo = reader.result;
+  //       console.log(person.photo);
+  //     };
+  //     reader.readAsDataURL(file);
+  //     // setFile("");
+  //   } else {
+  //     person.photo = "";
+  //   }
+  // };
+
   const imageHandler = (e) => {
-    // const file = e.target.files[0];
-    setFile(e.target.files[0]);
-    if (file) {
-      const reader = new FileReader();
-      console.log(file);
-      reader.onloadend = () => {
+    setFile("");
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
         person.photo = reader.result;
-      };
-      reader.readAsDataURL(file);
-    } else {
-      person.photo = "";
-    }
+      }
+    };
+    console.log(file);
+    reader.readAsDataURL(e.target.files[0]);
+    setFile(e.target.files[0]);
   };
   const handleChange = (e) => {
     const property = e.target.name;
