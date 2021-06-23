@@ -14,33 +14,60 @@ const PersonProvider = ({ children }) => {
     twitter: "",
     linkedin: "",
   });
-  const [newPerson, setNewPerson] = useState({});
+  const [newPerson, setNewPerson] = useState([]);
+
   const handleSubmit = () => {
-    // e.preventDefault();
-    // console.log(person);
-    const check =
-      person.name &&
-      person.dob &&
-      person.email &&
-      person.phone &&
-      person.occupation;
-    // let newPerson = {};
-    if (check) {
-      setNewPerson({ ...person, id: new Date().getTime().toString() });
-      //   return newPerson;
+    // setNewPerson((newPerson) => [...newPerson, person])
+    setNewPerson([...newPerson, person]);
+    setPerson({
+      name: "",
+      dob: "",
+      location: "",
+      occupation: "",
+      phone: "",
+      email: "",
+      sex: "",
+      facebook: "",
+      twitter: "",
+      linkedin: "",
+      photo: "",
+      sign: "",
+    });
+    // console.log(newPerson)
+  };
+  const [file, setFile] = useState("");
+
+  // For image diplay
+  const imageHandler = (e) => {
+    // const file = e.target.files[0];
+    setFile(e.target.files[0]);
+    if (file) {
+      const reader = new FileReader();
+      console.log(file);
+      reader.onloadend = () => {
+        person.photo = reader.result;
+      };
+      reader.readAsDataURL(file);
     } else {
-      console.log("empty values");
+      person.photo = "";
     }
   };
   const handleChange = (e) => {
     const property = e.target.name;
     const value = e.target.value;
-    // console.log(property, value);
     setPerson({ ...person, [property]: value });
   };
+
   return (
     <PersonContext.Provider
-      value={{ handleChange, handleSubmit, person, newPerson }}
+      value={{
+        handleChange,
+        handleSubmit,
+        person,
+        newPerson,
+        imageHandler,
+        file,
+      }}
     >
       {children}
     </PersonContext.Provider>

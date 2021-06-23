@@ -1,13 +1,34 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import "./Personal.css";
 import { Link } from "react-router-dom";
 import { PersonContext } from "./Context";
-// import { PersonContext } from "./TempC";
 
 const Personal = () => {
-  const { handleChange, handleSubmit, person, imageHandler, file } =
+  const { handleChange, handleSubmit, person } =
     React.useContext(PersonContext);
-  const fileInputRef = useRef();
+
+    // const [person, setPerson] = useState({
+    //   name: "",
+    //   dob: "",
+    //   location: "",
+    //   occupation: "",
+    //   phone: "",
+    //   email: "",
+    //   sex: "",
+    //   facebook: "",
+    //   twitter: "",
+    //   linkedin: "",
+    // });
+    // const handleSubmit = (e) => {
+    //   e.preventDefault();
+    // };
+    // const handleChange = (e) => {
+    //   const property = e.target.name;
+    //   const value = e.target.value;
+    //   // console.log(property, value);
+    //   setPerson({ ...person, [property]: value });
+    // };
+
   return (
     <div className="main ">
       <form>
@@ -23,7 +44,8 @@ const Personal = () => {
                 placeholder="Name"
                 value={person.name}
                 onChange={handleChange}
-              />
+                required="true"
+              /> 
             </label>
           </div>
           <label htmlFor="dob">
@@ -154,30 +176,13 @@ const Personal = () => {
         <div className="uploads">
           <div className="single-info">
             <label htmlFor="photo">
-              {/* Upload Photo */}
-              <button
-                className="btn"
-                onClick={(e) => {
-                  e.preventDefault();
-                  fileInputRef.current.click();
-                }}
-              >
-                Upload
-                {/* {file ? `${file.name} uploaded` : "Upload"} */}
-              </button>
+              Upload Photo
               <input
                 type="file"
                 id="photo"
-                name="photo"
                 className="input"
                 placeholder="Select File"
-                value={person.photo}
-                onChange={imageHandler}
-                accept=".png, .jpg, .jpeg"
-                style={{ display: "none" }}
-                ref={fileInputRef}
               />
-              {file && <p>{file.name} uploaded</p>}
             </label>
           </div>
           <div className="single-info">
@@ -186,23 +191,19 @@ const Personal = () => {
               <input
                 type="file"
                 id="sign"
-                name="sign"
                 className="input"
                 placeholder="Select File"
-                value={person.sign}
-                onChange={imageHandler}
               />
             </label>
           </div>
         </div>
       </form>
       <div className="btn__container">
-        <Link to="/">
-          <button className="btn" type="submit" onClick={handleSubmit}>
+          <Link to="/">
+            <button className="btn" type="submit" onClick={handleSubmit}>
             Save
-          </button>
-        </Link>
-
+            </button>
+          </Link>
         <button className="btn">Next</button>
       </div>
     </div>

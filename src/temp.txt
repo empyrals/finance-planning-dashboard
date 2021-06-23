@@ -1,0 +1,67 @@
+import React, { useState, useContext } from "react";
+
+const PersonContext = React.createContext();
+const PersonProvider = ({ children }) => {
+  const [person, setPerson] = useState({
+    name: "",
+    dob: "",
+    location: "",
+    occupation: "",
+    phone: "",
+    email: "",
+    sex: "",
+    facebook: "",
+    twitter: "",
+    linkedin: "",
+  });
+  const [newPerson, setNewPerson] = useState([]);
+  const handleChange = (e) => {
+    const property = e.target.name;
+    const value = e.target.value;
+    setPerson({ ...person, [property]: value });
+  };
+
+  const handleSubmit = (e) => {
+    // e.preventDefault();
+    // const check =
+    //   person.name &&
+    //   person.dob &&
+    //   person.email &&
+    //   person.phone &&
+    //   person.occupation;
+    // console.log(person);
+
+    // if (person.name && person.email) {
+    setNewPerson((newPerson) => [...newPerson, person]);
+    // setNewPerson([person]);
+    //   setNewPerson([...newPerson, person]);
+    //   setPerson({
+    //     name: "",
+    //     dob: "",
+    //     location: "",
+    //     occupation: "",
+    //     phone: "",
+    //     email: "",
+    //     sex: "",
+    //     facebook: "",
+    //     twitter: "",
+    //     linkedin: "",
+    //   });
+    // console.log(person);
+    console.log(newPerson);
+    //   return newPerson;
+    // } else {
+    //   console.log("empty values");
+    // }
+  };
+
+  return (
+    <PersonContext.Provider
+      value={{ handleChange, handleSubmit, person, newPerson }}
+    >
+      {children}
+    </PersonContext.Provider>
+  );
+};
+
+export { PersonProvider, PersonContext };
