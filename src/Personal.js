@@ -2,12 +2,40 @@ import React, { useRef, useState } from "react";
 import "./Personal.css";
 import { Link } from "react-router-dom";
 import { PersonContext } from "./Context";
-// import { PersonContext } from "./TempC";
+import { useForm } from "react-hook-form";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schema = yup.object().shape({
+  name: yup.string().min(3).required(),
+  dob: yup.date().required(),
+  location: yup.string().required(),
+  occupation: yup.string().required(),
+  phone: yup.number().min(10),
+  email: yup.string().email(),
+  sex: yup.string().required(),
+  facebook: yup.string().url().notRequired(),
+  twitter: yup.string().url().notRequired(),
+  linkedin: yup.string().url().notRequired(),
+});
 
 const Personal = () => {
-  const { handleChange, handleSubmit, person, imageHandler, file } =
+  // form validation
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  // from context
+  const { handleChange, handSubmit, person, imageHandler, file } =
     React.useContext(PersonContext);
   const fileInputRef = useRef();
+  // const handSubmitt = (data) => console.log(data);
+  // console.log(errors);
   return (
     <div className="main ">
       <form>
@@ -19,11 +47,13 @@ const Personal = () => {
                 type="text"
                 id="name"
                 name="name"
+                {...register("name")}
                 className="input"
                 placeholder="Name"
                 value={person.name}
                 onChange={handleChange}
               />
+              {errors.name && <p className="error">Name is required.</p>}
             </label>
           </div>
           <label htmlFor="dob">
@@ -32,35 +62,41 @@ const Personal = () => {
               type="date"
               id="dob"
               name="dob"
+              {...register("dob")}
               className="input dob"
               placeholder="DD/MM/YY"
               value={person.dob}
               onChange={handleChange}
             />
+            {errors.name && <p className="error">Enter Date of Birth.</p>}
           </label>
           <label htmlFor="location">
             Location
             <input
               type="text"
               className="input"
-              name="location"
+              // name="location"
+              {...register("location")}
               id="location"
               placeholder="Location"
               value={person.location}
               onChange={handleChange}
             />
+            {errors.name && <p className="error">Enter your location</p>}
           </label>
           <label htmlFor="occupation">
             Occupation
             <input
               type="text"
               className="input"
-              name="occupation"
+              // name="occupation"
+              {...register("occupation")}
               id="occupation"
               placeholder="Occupation"
               value={person.occupation}
               onChange={handleChange}
             />
+            {errors.name && <p className="error">Enter Occupation</p>}
           </label>
         </div>
         <div className="contact">
@@ -76,6 +112,7 @@ const Personal = () => {
                 value={person.phone}
                 onChange={handleChange}
               />
+              {errors.phone && <p className="error">Enter valid Phone no.</p>}
             </label>
           </div>
           <div className="single-info">
@@ -90,20 +127,23 @@ const Personal = () => {
                 value={person.email}
                 onChange={handleChange}
               />
+              {errors.phone && <p className="error">Enter valid E-mail</p>}
             </label>
           </div>
           <div className="single-info">
             <label htmlFor="sex">
               Sex
-              <input
-                type="text"
-                id="sex"
-                name="sex"
-                className="input"
-                placeholder="Male"
+              <select
+                {...register("sex")}
                 value={person.sex}
                 onChange={handleChange}
-              />
+                className="input"
+              >
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+              {errors.sex && <p className="error">Select Gender</p>}
             </label>
           </div>
         </div>
@@ -114,7 +154,8 @@ const Personal = () => {
               <input
                 type="text"
                 id="facebook"
-                name="facebook"
+                // name="facebook"
+                {...register("facebook")}
                 className="input"
                 placeholder="www.facebook.com/johndoe"
                 value={person.facebook}
@@ -128,7 +169,8 @@ const Personal = () => {
               <input
                 type="text"
                 id="twitter"
-                name="twitter"
+                // name="twitter"
+                {...register("facebook")}
                 className="input"
                 placeholder="www.twitter.com/johndoe"
                 value={person.twitter}
@@ -142,7 +184,8 @@ const Personal = () => {
               <input
                 type="text"
                 id="linkedin"
-                name="linkedin"
+                // name="linkedin"
+                {...register("facebook")}
                 className="input"
                 placeholder="www.linkedin.com/johndoe"
                 value={person.linkedin}
@@ -171,7 +214,7 @@ const Personal = () => {
                 name="photo"
                 className="input"
                 placeholder="Select File"
-                value={person.photo}
+                // value={person.photo}
                 onChange={imageHandler}
                 accept=".png, .jpg, .jpeg"
                 style={{ display: "none" }}
@@ -198,7 +241,12 @@ const Personal = () => {
       </form>
       <div className="btn__container">
         <Link to="/">
-          <button className="btn" type="submit" onClick={handleSubmit}>
+          <button
+            className="btn"
+            type="submit"
+            onClick={handleSubmit(handSubmit)}
+            // onClick={handleSubmit(handSubmitt)}
+          >
             Save
           </button>
         </Link>

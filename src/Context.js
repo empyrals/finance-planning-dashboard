@@ -16,7 +16,7 @@ const PersonProvider = ({ children }) => {
   });
   const [newPerson, setNewPerson] = useState([]);
 
-  const handleSubmit = () => {
+  const handSubmit = () => {
     // setNewPerson((newPerson) => [...newPerson, person])
     setNewPerson([...newPerson, person]);
     setPerson({
@@ -33,31 +33,8 @@ const PersonProvider = ({ children }) => {
       photo: "",
       sign: "",
     });
-    // console.log(newPerson)
   };
   const [file, setFile] = useState("");
-
-  // For image diplay
-  // const imageHandler = (e) => {
-  //   // const file = e.target.files[0];
-  //   console.log(e.target.files[0]);
-  //   // setFile(e.target.files[0]);
-  //   const f = e.target.files[0];
-  //   console.log(file);
-  //   if (f) {
-  //     setFile(f);
-  //     const reader = new FileReader();
-  //     console.log(file);
-  //     reader.onloadend = () => {
-  //       person.photo = reader.result;
-  //       console.log(person.photo);
-  //     };
-  //     reader.readAsDataURL(file);
-  //     // setFile("");
-  //   } else {
-  //     person.photo = "";
-  //   }
-  // };
 
   const imageHandler = (e) => {
     setFile("");
@@ -81,7 +58,7 @@ const PersonProvider = ({ children }) => {
     <PersonContext.Provider
       value={{
         handleChange,
-        handleSubmit,
+        handSubmit,
         person,
         newPerson,
         imageHandler,
